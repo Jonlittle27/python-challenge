@@ -12,16 +12,20 @@ with open(csvpath) as csvfile:
     months = []
     
     net_total = 0
+
+    priceChanges = []
+
+
     csvheader = next(csvreader)
 
-#creating the for loop and filling it the steps
+#creating the for loop - filling it the steps for total months and total price
     for row in csvreader:
-        
+
         newmonth = row[0].split("-")
         months.append(newmonth[0])
 
-        net_total = net_total + int(row[1])
-        
+        currentRow = int(row[1])
+        net_total = net_total + currentRow      
 
 
     total_months = len(months)
@@ -32,6 +36,8 @@ with open(csvpath) as csvfile:
     print("------------------")
     print(f"Total Months = {total_months}")
     print(f"Total: ${net_total}")
+    print("Average Price Change:")
+    
 
 
         
