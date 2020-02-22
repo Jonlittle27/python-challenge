@@ -79,18 +79,18 @@ with open(csvpath) as csvfile:
 
 output = os.path.join("..","Analyses","Financial_Analysis.txt")
 
-with open(output, 'w') as new:
-    new.write("Financial Analysis")
-    new.write("\n")
-    new.write(f"Total Months = {total_months}")
-    new.write("\n")
-    new.write(f"Total: ${net_total:,}")
-    new.write("\n")
-    new.write(f"Average Price Change: ${average}")
-    new.write("\n")
-    new.write(f"Greatest Increase in Profits:{greatest_increase}")
-    new.write("\n")
-    new.write(f"Greatest Decrease in Profits:{greatest_decrease}")
+with open(output, 'w') as text:
+    text.write("Financial Analysis")
+    text.write("\n")
+    text.write(f"Total Months = {total_months}")
+    text.write("\n")
+    text.write(f"Total: ${net_total:,}")
+    text.write("\n")
+    text.write(f"Average Price Change: ${average}")
+    text.write("\n")
+    text.write(f"Greatest Increase in Profits:{greatest_increase}")
+    text.write("\n")
+    text.write(f"Greatest Decrease in Profits:{greatest_decrease}")
 
 
     
