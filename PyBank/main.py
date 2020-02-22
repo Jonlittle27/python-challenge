@@ -15,28 +15,84 @@ with open(csvpath) as csvfile:
 
     priceChanges = []
 
+    greatest_increase = ["", 0]
+
+    greatest_decrease = ["", 100000]
+
 
     csvheader = next(csvreader)
 
+    previousRow = next(csvreader)
+
+    previousRow = int(previousRow[1])
+   
+
 #creating the for loop - filling it the steps for total months and total price
     for row in csvreader:
-
-        newmonth = row[0].split("-")
+        #Months
+        newmonth = row[0]
         months.append(newmonth[0])
+        
+        #net total
 
         currentRow = int(row[1])
-        net_total = net_total + currentRow      
+        net_total = net_total + currentRow   
+
+        #price changes
+
+        priceChange = currentRow - previousRow
+
+        priceChanges.append(priceChange)
+
+        previousRow = currentRow 
+
+        #increase / decrease
+
+        if priceChange > greatest_increase[1]:
+            greatest_increase[0] = row[0]
+            greatest_increase[1] = priceChange
+
+        if priceChange < greatest_decrease[1]:
+            greatest_decrease[0] = row[0]
+            greatest_decrease[1] = priceChange
 
 
-    total_months = len(months)
+
+
+    total_months = len(months) + 1
+
+    average = round(sum(priceChanges) / len(priceChanges),2)
+
+
+
+
 
     # Printing the analysis
 
     print("Financial Analysis")
     print("------------------")
     print(f"Total Months = {total_months}")
-    print(f"Total: ${net_total}")
-    print("Average Price Change:")
+    print(f"Total: ${net_total:,}")
+    print(f"Average Price Change: ${average}")
+    print(f"Greatest Increase in Profits:{greatest_increase}")
+    print(f"Greatest Decrease in Profits:{greatest_decrease}")
+
+output = os.path.join("..","Analyses","Financial_Analysis.txt")
+
+with open(output, 'w') as new:
+    new.write("Financial Analysis")
+    new.write("\n")
+    new.write(f"Total Months = {total_months}")
+    new.write("\n")
+    new.write(f"Total: ${net_total:,}")
+    new.write("\n")
+    new.write(f"Average Price Change: ${average}")
+    new.write("\n")
+    new.write(f"Greatest Increase in Profits:{greatest_increase}")
+    new.write("\n")
+    new.write(f"Greatest Decrease in Profits:{greatest_decrease}")
+
+
     
 
 
